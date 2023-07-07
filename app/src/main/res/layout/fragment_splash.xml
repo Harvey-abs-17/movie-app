@@ -4,19 +4,17 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="match_parent"
-	tools:context=".ui.MainActivity">
+	tools:context=".ui.fragments.splash.SplashFragment">
 	
-	
-	<fragment
-		android:id="@+id/fragmentContainerView"
-		android:name="androidx.navigation.fragment.NavHostFragment"
-		android:layout_width="409dp"
-		android:layout_height="729dp"
-		app:defaultNavHost="true"
-		app:navGraph="@navigation/navigation"
-		app:layout_constraintStart_toStartOf="parent"
+	<ImageView
+		android:id="@+id/app_logo"
+		android:layout_width="300dp"
+		android:layout_height="300dp"
+		android:src="@drawable/logo"
+		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintTop_toTopOf="parent"/>
-	
-	
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
