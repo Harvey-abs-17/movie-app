@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools">
+	
+	<data>
+		
+		<variable
+			name="movie"
+			type="com.example.movieapp.model.MoviesResponse.Data" />
+	
+	</data>
+	
+	
+	<com.google.android.material.card.MaterialCardView
+		android:layout_width="match_parent"
+		android:layout_height="450dp">
+		
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="match_parent"
+			android:layout_height="match_parent">
+			
+			
+			<ImageView
+				android:id="@+id/movie_image"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:setSrc="@{movie.poster}"
+				tools:src="@drawable/ic_launcher_background"/>
+			
+			<LinearLayout
+				android:paddingTop="100dp"
+				android:background="@drawable/bg_top_movie"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:elevation="2dp"
+				android:gravity="center"
+				android:orientation="vertical"
+				app:layout_constraintBottom_toBottomOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintStart_toStartOf="parent">
+				
+				<TextView
+					android:id="@+id/movie_name"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="@{movie.title, default=MovieName}"
+					style="@style/light_textView"
+					android:textStyle="bold"
+					android:textSize="20sp"/>
+				
+				<LinearLayout
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center"
+					android:layout_marginVertical="10dp"
+					android:orientation="horizontal"
+					android:textAlignment="center">
+					
+					
+					<TextView
+						android:id="@+id/movie_rate_number"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="12dp"
+						android:textAlignment="center"
+						android:drawableStart="@drawable/ic_baseline_star_24"
+						android:drawableTint="@color/yellow"
+						android:text="@{movie.imdbRating, default=9.5}"
+						style="@style/light_textView"
+						android:drawablePadding="4dp"
+						android:background="@drawable/bg_title_top_movies"
+						android:paddingHorizontal="20dp"
+						android:paddingVertical="4dp"/>
+					
+					
+					
+					<TextView
+						android:id="@+id/movie_country"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_marginEnd="12dp"
+						android:text="@{movie.country, default=USA}"
+						style="@style/light_textView"
+						android:background="@drawable/bg_title_top_movies"
+						android:paddingHorizontal="20dp"
+						android:paddingVertical="4dp" />
+					
+					
+					
+					<TextView
+						android:id="@+id/movie_year"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:text="@{movie.year, default=1999}"
+						style="@style/light_textView"
+						android:background="@drawable/bg_title_top_movies"
+						android:paddingHorizontal="20dp"
+						android:paddingVertical="4dp"/>
+				
+				
+				</LinearLayout>
+			
+			
+			</LinearLayout>
+		
+		
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	</com.google.android.material.card.MaterialCardView>
+
+</layout>
+
+

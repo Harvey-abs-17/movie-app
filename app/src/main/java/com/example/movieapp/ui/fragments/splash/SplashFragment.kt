@@ -50,6 +50,7 @@ class SplashFragment : Fragment() {
                         findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToRegisterFragment())
                         Toast.makeText(requireContext(), "token is empty", Toast.LENGTH_SHORT).show()
                     }else{
+                        findNavController().navigate(SplashFragmentDirections.actionHomeFragment())
                         Toast.makeText(requireContext(), "token is $it", Toast.LENGTH_SHORT).show()
                     }
                 }

@@ -6,6 +6,7 @@ object Constants {
     const val USER_TOKEN = "userToken"
     const val BASE_URL = "http://moviesapi.ir/api/v1/"
     const val POST_USER_URL = "register"
+    const val GET_MOVIE_URL = "genres"
     const val TIME_OUT = 60L
 
 }

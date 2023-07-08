@@ -42,6 +42,7 @@ class RegisterFragment : Fragment() {
 
         binding.apply {
             submitButton.setOnClickListener {
+
                 val userName = nameEdt.text.toString()
                 val userEmail = emailEdt.text.toString()
                 val userPassword = passwordEdt.text.toString()
@@ -55,6 +56,7 @@ class RegisterFragment : Fragment() {
                     registerViewModel.getUserDataViewModel(userBody)
                 }
             }
+
             registerViewModel.loadingViewModel.observe(viewLifecycleOwner) { visible ->
                 progressBar.makeVisible(visible)
                 submitButton.makeVisible(!visible)

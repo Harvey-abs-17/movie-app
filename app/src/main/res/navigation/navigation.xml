@@ -18,4 +18,14 @@
 		android:name="com.example.movieapp.ui.fragments.register.RegisterFragment"
 		android:label="fragment_register"
 		tools:layout="@layout/fragment_register" />
+	
+	<fragment
+		android:id="@+id/homeFragment"
+		android:name="com.example.movieapp.ui.fragments.home.HomeFragment"
+		android:label="fragment_home"
+		tools:layout="@layout/fragment_home"/>
+	<action
+		android:id="@+id/action_homeFragment"
+		app:destination="@id/homeFragment" />
+	
 </navigation>
