@@ -1,5 +1,6 @@
 package com.example.movieapp.api
 
+import com.example.movieapp.model.GenresResponse
 import com.example.movieapp.model.MoviesResponse
 import com.example.movieapp.model.UserRegisterBody
 import com.example.movieapp.model.UserRegisterResponse
@@ -16,9 +17,15 @@ interface ApiServices {
     @POST(Constants.POST_USER_URL)
     suspend fun postUserData(@Body userBody: UserRegisterBody): Response<UserRegisterResponse>
 
-    @GET("${Constants.GET_MOVIE_URL}/{genre_id}/movies/")
+    @GET("${Constants.GET_GENRE_URL}/{genre_id}/movies/")
     suspend fun getTopMovies(
         @Path("genre_id") id: Int = 1
     ): Response<MoviesResponse>
+
+    @GET(Constants.GET_GENRE_URL)
+    suspend fun getGenres() :Response<GenresResponse>
+
+    @GET(Constants.GET_MOVIES_URL)
+    suspend fun getMovies() :Response<MoviesResponse>
 
 }

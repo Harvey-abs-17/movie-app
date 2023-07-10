@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+	
+	<data>
+		
+		<variable
+			name="movie"
+			type="com.example.movieapp.model.MoviesResponse.Data" />
+	
+	</data>
+	
+	<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+		xmlns:app="http://schemas.android.com/apk/res-auto"
+		xmlns:tools="http://schemas.android.com/tools"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:padding="6dp">
+		
+		<!--  Image Card	-->
+		<com.google.android.material.card.MaterialCardView
+			android:id="@+id/movie_card"
+			android:layout_width="150dp"
+			android:layout_height="180dp"
+			app:cardBackgroundColor="@color/navy"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent">
+			
+			<ImageView
+				android:id="@+id/movie_image"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:scaleType="centerCrop"
+				android:setSrc="@{movie.poster}"
+				tools:src="@drawable/ic_launcher_background" />
+		
+		
+		</com.google.android.material.card.MaterialCardView>
+		
+		<!--	Movie info	-->
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			app:layout_constraintStart_toEndOf="@id/movie_card"
+			app:layout_constraintTop_toTopOf="parent">
+			
+			<TextView
+				android:id="@+id/movie_name"
+				style="@style/light_textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:text="@{movie.title}"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				android:maxLines="2"/>
+			
+			<TextView
+				android:id="@+id/movie_rate"
+				style="@style/light_textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:drawablePadding="4dp"
+				android:text="@{movie.imdbRating}"
+				app:drawableStartCompat="@drawable/ic_baseline_star_24"
+				app:drawableTint="@color/silver"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/movie_name" />
+			
+			<TextView
+				android:id="@+id/movie_Country"
+				style="@style/light_textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:drawablePadding="4dp"
+				android:text="@{movie.country}"
+				app:drawableStartCompat="@drawable/ic_baseline_language_24"
+				app:drawableTint="@color/silver"
+				android:maxLines="2"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/movie_rate" />
+			
+			<TextView
+				android:id="@+id/movie_release_date"
+				style="@style/light_textView"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="8dp"
+				android:drawablePadding="4dp"
+				android:text="@{movie.year}"
+				app:drawableStartCompat="@drawable/ic_baseline_calendar_today_24"
+				app:drawableTint="@color/silver"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/movie_Country" />
+			
+			<TextView
+				android:id="@+id/movie_more_info"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="12dp"
+				android:drawablePadding="4dp"
+				android:fontFamily="sans-serif-light"
+				android:text="@string/more_info"
+				android:textColor="@color/red"
+				android:textSize="16sp"
+				app:drawableEndCompat="@drawable/ic_baseline_keyboard_arrow_right_24"
+				app:drawableTint="@color/red"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/movie_release_date" />
+		
+		
+		</androidx.constraintlayout.widget.ConstraintLayout>
+	
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

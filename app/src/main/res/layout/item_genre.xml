@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto">
+	
+	<data>
+		
+		<variable
+			name="genre"
+			type="com.example.movieapp.model.GenresResponse.GenresResponseItem" />
+	
+	</data>
+	
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginTop="6dp"
+		android:layout_marginEnd="6dp">
+		
+		<TextView
+			android:id="@+id/genre_item_txt"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:background="@drawable/bg_title_top_movies"
+			android:ellipsize="end"
+			android:maxLines="1"
+			android:padding="6dp"
+			android:text="@{genre.name}"
+			android:textColor="@color/silver"
+			android:textSize="16sp"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+	
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.movieapp.databinding.FragmentHomeBinding
+import com.example.movieapp.model.MoviesResponse
+import com.example.movieapp.ui.fragments.home.adapter.GenreAdapter
+import com.example.movieapp.ui.fragments.home.adapter.MoviesAdapter
 import com.example.movieapp.ui.fragments.home.adapter.TopMoviesAdapter
 import com.example.movieapp.utils.initRec
 import com.example.movieapp.viewmodel.HomeViewModel
@@ -26,7 +29,14 @@ class HomeFragment : Fragment() {
     private val pagerSnapHelper by lazy { PagerSnapHelper() }
 
     @Inject
-    lateinit var adapter: TopMoviesAdapter
+    lateinit var topMoviesAdapter: TopMoviesAdapter
+
+    @Inject
+    lateinit var genreAdapter: GenreAdapter
+
+    @Inject
+    lateinit var moviesAdapter :MoviesAdapter
+
 
 
     override fun onCreateView(
@@ -42,22 +52,45 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //make Top movies request
-        homeViewModel.getTopMoviesViewModel()
+        homeViewModel.apply {
+            getTopMoviesViewModel()
+            getGenresViewModel()
+            getMoviesViewModel()
+        }
 
 
         binding.apply {
-            homeViewModel.topMoviesList.observe(viewLifecycleOwner) { movie ->
-                adapter.differ.submitList(movie.data)
 
-                topMoviesRec.initRec(
-                    LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
-                    adapter
-                )
+            //Top Movies
+            homeViewModel.apply {
+                topMoviesList.observe(viewLifecycleOwner) { movie ->
+                    topMoviesAdapter.differ.submitList(movie.data)
+                    topMoviesRec.initRec(
+                        LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
+                        topMoviesAdapter
+                    )
+                    pagerSnapHelper.attachToRecyclerView(topMoviesRec)
+                    movieIndicator.attachToRecyclerView(topMoviesRec, pagerSnapHelper)
+                }
 
-                pagerSnapHelper.attachToRecyclerView(topMoviesRec)
-                movieIndicator.attachToRecyclerView(topMoviesRec, pagerSnapHelper)
+                //Genres
+                genresList.observe(viewLifecycleOwner) { genre ->
+                    genreAdapter.differ.submitList(genre)
+                    genreRec.initRec(
+                        LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false),
+                        genreAdapter
+                    )
+                }
+
+                //Movies
+                moviesList.observe(viewLifecycleOwner){
+                    moviesAdapter.setData(it?.data!! as List<MoviesResponse.Data>)
+                    lastMoviesRec.initRec(
+                        LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false),
+                        moviesAdapter
+                    )
+                }
             }
-
         }
     }
 
