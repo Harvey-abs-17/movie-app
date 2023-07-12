@@ -37,6 +37,10 @@ class TopMoviesAdapter @Inject constructor(): RecyclerView.Adapter<TopMoviesAdap
 
     override fun getItemCount() = 5
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     private val differCallback = object : DiffUtil.ItemCallback<MoviesResponse.Data>() {
         override fun areItemsTheSame(oldItem: MoviesResponse.Data, newItem: MoviesResponse.Data): Boolean {
             return oldItem.id == newItem.id

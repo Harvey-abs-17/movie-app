@@ -23,7 +23,7 @@ class MoviesAdapter @Inject constructor() :RecyclerView.Adapter<MoviesAdapter.Mo
 
     }
 
-    fun setData(movie :List<Data>){
+    fun setData(movie: List<Data>){
         val differ = MoviesDifferCallback(movieData, movie)
         val differCallback = DiffUtil.calculateDiff(differ)
         movieData = movie
@@ -48,6 +48,10 @@ class MoviesAdapter @Inject constructor() :RecyclerView.Adapter<MoviesAdapter.Mo
 
     override fun onBindViewHolder(holder: MoviesViewHolder, position: Int) {
         holder.bindView(movieData[position])
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
     }
 
     override fun getItemCount() = movieData.size

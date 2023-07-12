@@ -19,7 +19,7 @@ interface ApiServices {
 
     @GET("${Constants.GET_GENRE_URL}/{genre_id}/movies/")
     suspend fun getTopMovies(
-        @Path("genre_id") id: Int = 1
+        @Path("genre_id") id: Int = 3
     ): Response<MoviesResponse>
 
     @GET(Constants.GET_GENRE_URL)
@@ -27,5 +27,10 @@ interface ApiServices {
 
     @GET(Constants.GET_MOVIES_URL)
     suspend fun getMovies() :Response<MoviesResponse>
+
+    @GET(Constants.GET_MOVIES_URL)
+    suspend fun getSearchResult(@Query("q") name :String) :Response<MoviesResponse>
+
+
 
 }

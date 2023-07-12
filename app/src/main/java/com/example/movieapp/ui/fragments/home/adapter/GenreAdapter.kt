@@ -34,6 +34,10 @@ class GenreAdapter @Inject constructor() :RecyclerView.Adapter<GenreAdapter.Genr
 
     override fun getItemCount() = differ.currentList.size
 
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
     private val differCallback = object :DiffUtil.ItemCallback<GenresResponseItem>(){
         override fun areItemsTheSame(
             oldItem: GenresResponseItem,

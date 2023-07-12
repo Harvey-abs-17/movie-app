@@ -54,9 +54,7 @@ class SplashFragment : Fragment() {
                         Toast.makeText(requireContext(), "token is $it", Toast.LENGTH_SHORT).show()
                     }
                 }
-
             }
-
         }
 
     }
