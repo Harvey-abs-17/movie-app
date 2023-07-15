@@ -32,5 +32,17 @@
 		android:name="com.example.movieapp.ui.fragments.search.SearchFragment"
 		android:label="fragment_search"
 		tools:layout="@layout/fragment_search" />
+	<fragment
+		android:id="@+id/detailFragment"
+		android:name="com.example.movieapp.ui.fragments.detail.DetailFragment"
+		android:label="fragment_detail"
+		tools:layout="@layout/fragment_detail" >
+		<argument
+			android:name="movie_id"
+			app:argType="integer" />
+	</fragment>
+	<action
+		android:id="@+id/action_detailFragment"
+		app:destination="@id/detailFragment" />
 
 </navigation>

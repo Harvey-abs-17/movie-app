@@ -9,11 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentSearchBinding
 import com.example.movieapp.model.MoviesResponse
+import com.example.movieapp.ui.fragments.detail.DetailFragmentDirections
 import com.example.movieapp.ui.fragments.home.adapter.MoviesAdapter
 import com.example.movieapp.utils.initRec
 import com.example.movieapp.utils.makeVisible
@@ -47,12 +49,13 @@ class SearchFragment : Fragment() {
 
         binding.apply {
 
+            //get edit text data and send request to server
             searchEditText.addTextChangedListener {
                 searchViewModel.getSearchResultViewModel(it.toString())
             }
 
             searchViewModel.apply {
-
+                //fill search adapter data
                 searchListResult.observe(viewLifecycleOwner) {
                     searchAdapter.setData(it!!.data!! as List<MoviesResponse.Data>)
                     searchRec.initRec(
@@ -60,6 +63,8 @@ class SearchFragment : Fragment() {
                         searchAdapter
                     )
                 }
+
+                //if result is null -> manage empty views
                 isEmpty.observe(viewLifecycleOwner) {
                     if (it) {
                         notFoundImage.makeVisible(it)
@@ -69,6 +74,8 @@ class SearchFragment : Fragment() {
                         notFountTxt.makeVisible(it)
                     }
                 }
+
+                //manage loading views
                 loading.observe(viewLifecycleOwner) {
                     if (it) {
                         searchProgress.makeVisible(it)
@@ -80,6 +87,12 @@ class SearchFragment : Fragment() {
                 }
 
             }
+
+            //on item click listener
+            searchAdapter.onItemClickListener {
+                findNavController().navigate(DetailFragmentDirections.actionDetailFragment(it))
+            }
+
         }
 
     }

@@ -19,6 +19,14 @@ class MoviesAdapter @Inject constructor() :RecyclerView.Adapter<MoviesAdapter.Mo
 
         fun bindView(movieItem :Data){
             binding.movie = movieItem
+
+            //item click listener
+            binding.root.setOnClickListener {
+                itemClickListener?.let {
+                    it(movieItem.id!!)
+                }
+            }
+
         }
 
     }
@@ -28,6 +36,11 @@ class MoviesAdapter @Inject constructor() :RecyclerView.Adapter<MoviesAdapter.Mo
         val differCallback = DiffUtil.calculateDiff(differ)
         movieData = movie
         differCallback.dispatchUpdatesTo(this)
+    }
+
+    private var itemClickListener: ((Int) -> Unit) ?= null
+    fun onItemClickListener( listener :((Int) -> Unit) ){
+        itemClickListener = listener
     }
 
     inner class MoviesDifferCallback(private val oldItem :List<Data>, private val newItem :List<Data>) :DiffUtil.Callback(){

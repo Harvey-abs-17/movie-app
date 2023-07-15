@@ -1,5 +1,6 @@
 package com.example.movieapp.api
 
+import com.example.movieapp.model.DetailsResponse
 import com.example.movieapp.model.GenresResponse
 import com.example.movieapp.model.MoviesResponse
 import com.example.movieapp.model.UserRegisterBody
@@ -31,6 +32,8 @@ interface ApiServices {
     @GET(Constants.GET_MOVIES_URL)
     suspend fun getSearchResult(@Query("q") name :String) :Response<MoviesResponse>
 
+    @GET("${Constants.GET_MOVIES_URL}/{movie_id}")
+    suspend fun getDetailsMovie(@Path("movie_id") id :Int) :Response<DetailsResponse>
 
 
 }

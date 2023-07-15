@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.movieapp.databinding.FragmentHomeBinding
 import com.example.movieapp.model.MoviesResponse
+import com.example.movieapp.ui.fragments.detail.DetailFragmentDirections
 import com.example.movieapp.ui.fragments.home.adapter.GenreAdapter
 import com.example.movieapp.ui.fragments.home.adapter.MoviesAdapter
 import com.example.movieapp.ui.fragments.home.adapter.TopMoviesAdapter
@@ -35,9 +37,19 @@ class HomeFragment : Fragment() {
     lateinit var genreAdapter: GenreAdapter
 
     @Inject
-    lateinit var moviesAdapter :MoviesAdapter
+    lateinit var moviesAdapter: MoviesAdapter
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        //make Top movies request
+        homeViewModel.apply {
+            getTopMoviesViewModel()
+            getGenresViewModel()
+            getMoviesViewModel()
+        }
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,15 +62,6 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //make Top movies request
-        homeViewModel.apply {
-            getTopMoviesViewModel()
-            getGenresViewModel()
-            getMoviesViewModel()
-        }
-
-
         binding.apply {
 
             //Top Movies
@@ -83,12 +86,17 @@ class HomeFragment : Fragment() {
                 }
 
                 //Movies
-                moviesList.observe(viewLifecycleOwner){
+                moviesList.observe(viewLifecycleOwner) {
                     moviesAdapter.setData(it?.data!! as List<MoviesResponse.Data>)
                     lastMoviesRec.initRec(
                         LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false),
                         moviesAdapter
                     )
+                }
+
+                //item click listener
+                moviesAdapter.onItemClickListener {
+                    findNavController().navigate(DetailFragmentDirections.actionDetailFragment(it))
                 }
             }
         }

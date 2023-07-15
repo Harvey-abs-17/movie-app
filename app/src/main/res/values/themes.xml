@@ -29,6 +29,13 @@
 		<item name="android:textColor">@color/silver</item>
 		<item name="android:ellipsize">end</item>
 		<item name="maxLines">1</item>
+	
+	</style>
+	
+	<style name="shape_image_view">
+		
+		<item name="cornerFamily">rounded</item>
+		<item name="cornerSize">20dp</item>
 		
 	</style>
 </resources>
