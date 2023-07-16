@@ -9,5 +9,6 @@ object Constants {
     const val GET_GENRE_URL = "genres"
     const val GET_MOVIES_URL = "movies"
     const val TIME_OUT = 60L
+    const val DATA_BASE_NAME = "data_base_name"
 
 }
